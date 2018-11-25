@@ -1,1 +1,1 @@
-# mentoring_react
+# Mentoring program React JS
