@@ -23,6 +23,7 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "babel-loader": "^8.0.4",
     "jest": "^23.6.0"
   }
 }
