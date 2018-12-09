@@ -1,0 +1,20 @@
+.status {
+	padding: 1em;
+	background-color: #F5F5F5;
+	color: #000;
+	overflow: auto;
+	display: flex;
+}
+
+.status__found {
+	flex-grow: 1;
+}
+
+.status__sort-by-caption {
+	padding-right: 3ex;
+}
+
+.status__rating {
+	margin-left: 3em;
+	color: #F55363;
+}

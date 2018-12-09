@@ -1,0 +1,13 @@
+.result-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.result-list__item {
+	list-style: none;
+	width: 32ex;
+	height: 32em;
+	margin-bottom: 3em;
+	background-color: #ccc;
+}
