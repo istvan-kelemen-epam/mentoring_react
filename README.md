@@ -25,10 +25,18 @@ $ npm test -- -u
 ### Coverage
 
 ```bash
-$ npm test -- ---coverage
+$ npm test -- --coverage
 ```
 
 ...and then look at `coverage/lcov-report/index.html` in browser
+
+### Cypress
+
+```bash
+$ npm run cypress
+```
+
+...and then select `google.spec.js`
 
 ### Notes
 
