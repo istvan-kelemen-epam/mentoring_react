@@ -50,12 +50,17 @@ body {
 	display: inline;
 }
 
+.search-by header {
+	text-transform: uppercase;
+}
+
 .search-by button {
 	margin-left: 1em;
 	padding: 1ex 1em;
 	border: 0;
 	border-radius: 0.5ex;
 	width: 10ex;
+	text-transform: uppercase;
 	color: #fff;
 	background-color: #3C3C3C;
 	cursor: pointer;
@@ -76,6 +81,7 @@ body {
 	border: 0;
 	border-radius: 0.5ex;
 	width: 20ex;
+	text-transform: uppercase;
 	color: #fff;
 	background-color: #F55363;
 	cursor: pointer;
@@ -112,7 +118,17 @@ body {
 	text-align: center;
 }
 .result-list {
-	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.result-list__item {
+	list-style: none;
+	width: 32ex;
+	height: 32em;
+	margin-bottom: 3em;
+	background-color: #ccc;
 }
 
 /*# sourceMappingURL=main.css.map*/

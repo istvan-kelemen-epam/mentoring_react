@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scenes/Status .render should create empty result 1`] = `
+<section
+  className="status"
+>
+  <span
+    className="status__found"
+  >
+    
+  </span>
+  <span
+    className="status__sort-by"
+  >
+    <span
+      className="status__sort-by-caption"
+    >
+      Sort by
+    </span>
+    <span
+      className="status__sort-by-value"
+    >
+      release date
+    </span>
+  </span>
+  <span
+    className="status__rating"
+  >
+    rating
+  </span>
+</section>
+`;
+
+exports[`scenes/Status .render should create empty result 2`] = `
+<section
+  className="status"
+>
+  <span
+    className="status__found"
+  >
+    2 movies found
+  </span>
+  <span
+    className="status__sort-by"
+  >
+    <span
+      className="status__sort-by-caption"
+    >
+      Sort by
+    </span>
+    <span
+      className="status__sort-by-value"
+    >
+      release date
+    </span>
+  </span>
+  <span
+    className="status__rating"
+  >
+    rating
+  </span>
+</section>
+`;

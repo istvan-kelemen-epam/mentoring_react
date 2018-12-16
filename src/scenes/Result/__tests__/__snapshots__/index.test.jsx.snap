@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scenes/Result .render should create "not found" result 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__not-found"
+  >
+    No films found
+  </div>
+</section>
+`;
+
+exports[`scenes/Result .render should create empty result 1`] = `
+<section
+  className="result"
+/>
+`;
+
+exports[`scenes/Result .render should create list result 1`] = `
+<section
+  className="result"
+>
+  <ul
+    className="result-list"
+  >
+    <li
+      className="result-list__item"
+    >
+      <div
+        className="result-list__item-title"
+      >
+        Kill Bill
+      </div>
+      <div
+        className="result-list__item-year"
+      >
+        2003
+      </div>
+      <div
+        className="result-list__item-genre"
+      >
+        Action & Adventure
+      </div>
+    </li>
+  </ul>
+</section>
+`;

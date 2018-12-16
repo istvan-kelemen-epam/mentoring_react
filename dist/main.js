@@ -19970,7 +19970,7 @@ var App = exports.App = function (_React$Component) {
 						null,
 						(this.state.searchExpression.toString(), 'only for debug purpose', '')
 					),
-					React.createElement(_Status.Status, null),
+					React.createElement(_Status.Status, { data: this.state.result }),
 					React.createElement(_Result.Result, { data: this.state.result })
 				)
 			);
@@ -20131,10 +20131,24 @@ var List = exports.List = function (_React$Component) {
 				'ul',
 				{ className: 'result-list' },
 				this.props.data.map(function (item) {
-					React.createElement(
+					return React.createElement(
 						'li',
-						null,
-						'aaa'
+						{ key: item.id, className: 'result-list__item' },
+						React.createElement(
+							'div',
+							{ className: 'result-list__item-title' },
+							item.title
+						),
+						React.createElement(
+							'div',
+							{ className: 'result-list__item-year' },
+							item.year
+						),
+						React.createElement(
+							'div',
+							{ className: 'result-list__item-genre' },
+							item.genre
+						)
 					);
 				})
 			);
@@ -20475,6 +20489,12 @@ var _react = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 
 var React = _interopRequireWildcard(_react);
 
+var _propTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20495,13 +20515,22 @@ var Status = exports.Status = function (_React$Component) {
 	_createClass(Status, [{
 		key: 'render',
 		value: function render() {
+			var data = this.props.data;
+			var foundText = void 0;
+
+			if (data) {
+				foundText = data.length + ' movies found';
+			} else {
+				foundText = '';
+			}
+
 			return React.createElement(
 				'section',
 				{ className: 'status' },
 				React.createElement(
 					'span',
 					{ className: 'status__found' },
-					'0 movies found'
+					foundText
 				),
 				React.createElement(
 					'span',
@@ -20528,6 +20557,10 @@ var Status = exports.Status = function (_React$Component) {
 
 	return Status;
 }(React.Component);
+
+Status.propTypes = {
+	data: _propTypes2.default.array
+};
 
 /***/ }),
 
@@ -20570,30 +20603,37 @@ var FetchData = exports.FetchData = function () {
 		value: function searchByTitle(searchExpression) {
 			// eslint-disable-line no-unused-vars
 			return [{
+				id: 119556,
 				title: 'Kill Bill',
 				year: 2003,
 				genre: 'Action & Adventure'
 			}, {
+				id: 345234,
 				title: 'Kill Bill 2',
 				year: 2004,
 				genre: 'Action & Adventure'
 			}, {
+				id: 897434,
 				title: 'Pulp fiction',
 				year: 1994,
 				genre: 'Oscar-winning movies'
 			}, {
+				id: 123498,
 				title: 'Jackie Brown',
 				year: 1997,
 				genre: 'Dramas'
 			}, {
+				id: 748234,
 				title: 'Reservoir dogs',
 				year: 1992,
 				genre: 'Independent movies'
 			}, {
+				id: 483295,
 				title: 'Four rooms',
 				year: 1995,
 				genre: 'Comedies'
 			}, {
+				id: 273902,
 				title: 'Django unchained',
 				year: 2012,
 				genre: 'Dramas'

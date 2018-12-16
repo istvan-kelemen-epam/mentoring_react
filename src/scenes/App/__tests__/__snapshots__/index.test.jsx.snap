@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`scenes/App should create snapshot 1`] = `
+<main>
+  <section
+    className="main-header"
+  >
+    <h1
+      className="main-caption"
+    >
+      netflixroulette
+    </h1>
+    <section
+      className="search"
+    >
+      <h2>
+        Find your movie
+      </h2>
+      <input
+        placeholder="Search expression"
+        type="text"
+      />
+      <section
+        className="search-by"
+      >
+        <header>
+          Search by
+        </header>
+        <main>
+          <button
+            className="selected"
+            onClick={[Function]}
+          >
+            Title
+          </button>
+          <button
+            className=""
+            onClick={[Function]}
+          >
+            Genre
+          </button>
+        </main>
+      </section>
+      <section
+        className="search-button"
+      >
+        <button
+          onClick={[Function]}
+        >
+          Search
+        </button>
+      </section>
+    </section>
+  </section>
+  <div>
+    
+  </div>
+  <section
+    className="status"
+  >
+    <span
+      className="status__found"
+    >
+      
+    </span>
+    <span
+      className="status__sort-by"
+    >
+      <span
+        className="status__sort-by-caption"
+      >
+        Sort by
+      </span>
+      <span
+        className="status__sort-by-value"
+      >
+        release date
+      </span>
+    </span>
+    <span
+      className="status__rating"
+    >
+      rating
+    </span>
+  </section>
+  <section
+    className="result"
+  />
+</main>
+`;
