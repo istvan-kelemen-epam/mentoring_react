@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+}
+
+body {
+	color: #fff;
+	font-family: sans-serif;
+	font-size: medium; /* Just to clearly see the reference */
+}
+
+.main-header {
+	padding: 1em 8em;
+	background-color: #333;
+	overflow: auto;
+}
+
+.main-caption {
+	font-size: 1rem;
+	color: #F55363;
+	text-shadow: 0 0 0.2ex #000;
+	padding-bottom: 1em;
+}
