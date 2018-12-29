@@ -9,10 +9,18 @@ module.exports = {
         "es6": true,
 		"jest/globals": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+	],
     "parserOptions": {
         "ecmaVersion": 2017,
         "sourceType": "module"
+    },
+    "settings": {
+        "react": {
+            "version": "16.3.2"
+        }
     },
     "rules": {
         "indent": [
@@ -31,6 +39,5 @@ module.exports = {
             "off",
             "always"
 		]
-    },
-	"extends": ["eslint:recommended", "plugin:react/recommended"]
+    }
 };

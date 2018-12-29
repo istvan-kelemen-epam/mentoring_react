@@ -1,0 +1,29 @@
+.search-by {
+	margin-top: 1em;
+	float: left;
+}
+
+.search-by header, .search-by main {
+	display: inline;
+}
+
+.search-by header {
+	text-transform: uppercase;
+}
+
+.search-by button {
+	margin-left: 1em;
+	padding: 1ex 1em;
+	border: 0;
+	border-radius: 0.5ex;
+	width: 10ex;
+	text-transform: uppercase;
+	color: #fff;
+	background-color: #3C3C3C;
+	cursor: pointer;
+}
+
+.search-by button.selected {
+	background-color: #F55363;
+	cursor: auto;
+}

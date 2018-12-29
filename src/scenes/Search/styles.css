@@ -1,0 +1,16 @@
+.search {
+	background-color: #333
+}
+
+.search h2 {
+	text-transform: uppercase;
+}
+
+.search input {
+	width: 100%;
+	padding: 1em;
+	color: #fff;
+	background-color: #070506;
+	border-width: 0 0 1px 0;
+	border-color: #F55363;
+}
