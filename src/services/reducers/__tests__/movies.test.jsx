@@ -5,7 +5,7 @@ describe('services/reducers/movies', () => {
 	it('should return initial movies state', () => {
 		const moviesState = movies(undefined, {});
 		expect(moviesState).toEqual({
-			limit: 12,
+			limit: 60,
 			offset: 0,
 			total: 0
 		});

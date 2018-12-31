@@ -2,13 +2,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { updateSortBy } from '../../services/actionCreators';
+import { updateSortBy, clearOffset, fetchMovies } from '../../services/actionCreators';
 
 import './styles.css';
 
 class SortBy extends React.Component {
 	handleSelectChange(e) {
 		this.props.updateSortBy(e.currentTarget.value);
+		this.props.clearOffset();
+		this.props.fetchMovies();
 	}
 
 	render() {
@@ -35,7 +37,9 @@ class SortBy extends React.Component {
 SortBy.propTypes = {
 	total: PropTypes.number.isRequired,
 	sortBy: PropTypes.string.isRequired,
-	updateSortBy: PropTypes.func.isRequired
+	updateSortBy: PropTypes.func.isRequired,
+	clearOffset: PropTypes.func.isRequired,
+	fetchMovies: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -46,7 +50,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-	updateSortBy
+	updateSortBy,
+	clearOffset,
+	fetchMovies
 };
 
 export const testHelper = { SortBy };
