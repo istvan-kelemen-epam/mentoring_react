@@ -17,12 +17,14 @@ describe('scenes/SearchButton', () => {
 	});
 
 	it('should trigger search', () => {
-		const triggerSearch = jest.fn();
+		const clearOffset = jest.fn();
+		const fetchMovies = jest.fn();
 		const searchButton = Object.create(testHelper.SearchButton.prototype);
 
-		searchButton.props = { triggerSearch };
+		searchButton.props = { clearOffset, fetchMovies };
 		searchButton.handleClick();
 
-		expect(triggerSearch).toHaveBeenCalled();
+		expect(clearOffset).toHaveBeenCalled();
+		expect(fetchMovies).toHaveBeenCalled();
 	});
 });

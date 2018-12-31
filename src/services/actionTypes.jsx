@@ -1,6 +1,11 @@
-export const UPDATE_SEARCH_EXPRESSION = 'UPDATE_SEARCH_EXPRESSION';
-export const UPDATE_SEARCH_BY = 'UPDATE_SEARCH_BY';
-export const TRIGGER_SEARCH = 'TRIGGER_SEARCH';
+let actionId = 0;
+
+export const UPDATE_SEARCH_EXPRESSION = ++actionId;
+export const UPDATE_SEARCH_BY = ++actionId;
+export const CLEAR_OFFSET = ++actionId;
+export const FETCH_MOVIES = ++actionId;
+
+export const UPDATE_SORT_BY = ++actionId;
 
 export const SEARCH_BY = {
 	TITLE: 'TITLE',

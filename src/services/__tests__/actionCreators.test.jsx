@@ -1,5 +1,5 @@
-import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, TRIGGER_SEARCH } from '../actionTypes';
-import { updateSearchExpression, updateSearchBy, triggerSearch } from '../actionCreators';
+import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, UPDATE_SORT_BY, FETCH_MOVIES, CLEAR_OFFSET, SEARCH_BY } from '../actionTypes';
+import { updateSearchExpression, updateSearchBy, updateSortBy, clearOffset, fetchMovies } from '../actionCreators';
 
 describe('services/actionCreators', () => {
 	it('should create search expression action', () => {
@@ -24,10 +24,106 @@ describe('services/actionCreators', () => {
 		});
 	});
 
-	it('should create trigger search action', () => {
-		const result = triggerSearch();
+	it('should create sort by action', () => {
+		const sortBy = 'search by';
+		const result = updateSortBy(sortBy);
 		expect(result).toEqual({
-			type: TRIGGER_SEARCH
+			type: UPDATE_SORT_BY,
+			payload: {
+				sortBy
+			}
+		});
+	});
+
+	it('should create clear offset action', () => {
+		const result = clearOffset();
+		expect(result).toEqual({
+			type: CLEAR_OFFSET
+		});
+	});
+
+	describe('fetch movies action', () => {
+		const getStateMock = function(paraMock) {
+			const baseMock = {
+				search: {
+					searchExpression: 'search expression',
+					searchBy: SEARCH_BY.TITLE
+				},
+				sort: {
+					sortBy: 'title'
+				},
+				movies: {
+					limit: 12,
+					offset: 24
+				}
+			};
+			return Object.assign({}, baseMock, paraMock);
+		};
+		let fetchMoviesAsync;
+		let fetch;
+		let movies;
+
+		beforeEach(() => {
+			fetchMoviesAsync = fetchMovies();
+			fetch = window.fetch;
+			window.fetch = jest.fn(() => {
+				return Promise.resolve({
+					ok: true,
+					json: jest.fn(() => Promise.resolve(movies))
+				});
+			});
+		});
+
+		afterEach(() => {
+			window.fetch = fetch;
+		});
+
+		it('should create fetch movies async function', () => {
+			expect(fetchMoviesAsync).toBeInstanceOf(Function);
+		});
+
+		it('should alert that search by genres is not implemented', () => {
+			const dispatch = jest.fn();
+			const getState = jest.fn(getStateMock.bind({}, {
+				search: { searchBy: SEARCH_BY.GENRE }
+			}));
+			const alert = window.alert;
+			window.alert = jest.fn();
+			fetchMoviesAsync(dispatch, getState);
+			expect(window.alert).toHaveBeenCalled();
+			expect(window.fetch).not.toHaveBeenCalled();
+			expect(dispatch).not.toHaveBeenCalled();
+			window.alert = alert;
+		});
+
+		it('should throw error', () => {
+			const dispatch = jest.fn();
+			const getState = jest.fn(getStateMock);
+			window.fetch = jest.fn(() => {
+				return {
+					then: func => {
+						func({
+							ok: false
+						});
+					}
+				};
+			});
+			expect(() => { fetchMoviesAsync(dispatch, getState); }).toThrow();
+		});
+
+		it('should fetch for movies', done => {
+			const dispatch = jest.fn(action => {
+				expect(action).toEqual({
+					type: FETCH_MOVIES,
+					payload: {
+						movies
+					}
+				});
+				done();
+			});
+			const getState = jest.fn(getStateMock);
+			movies = [{}];
+			fetchMoviesAsync(dispatch, getState);
 		});
 	});
 });

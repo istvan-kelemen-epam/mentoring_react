@@ -1,4 +1,4 @@
-import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, TRIGGER_SEARCH, SEARCH_BY } from '../actionTypes';
+import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, SEARCH_BY } from '../actionTypes';
 import { pickSearchState } from '../storeUtils';
 
 const pickedSearchState = pickSearchState();
@@ -18,10 +18,6 @@ export default (state = initialState, action) => {
 	case UPDATE_SEARCH_BY: {
 		let newState = Object.assign({}, state);
 		newState.searchBy = action.payload.searchBy;
-		return newState;
-	}
-	case TRIGGER_SEARCH: {
-		let newState = Object.assign({}, state); // Only the address changed
 		return newState;
 	}
 	default:

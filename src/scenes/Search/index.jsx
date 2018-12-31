@@ -18,8 +18,10 @@ class Search extends React.Component {
 			<section className="search">
 				<h2>Find your movie</h2>
 				<input type="text" placeholder="Search expression" value={this.props.searchExpression} onChange={this.handleInputChange.bind(this)} />
-				<SearchButton />
-				<SearchBy />
+				<section className="search__filter-panel">
+					<SearchBy />
+					<SearchButton />
+				</section>
 			</section>
 		);
 	}

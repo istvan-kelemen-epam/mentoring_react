@@ -2,13 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { triggerSearch } from '../../../../services/actionCreators';
+import { clearOffset, fetchMovies } from '../../../../services/actionCreators';
 
 import './styles.css';
 
 class SearchButton extends React.Component {
 	handleClick() {
-		this.props.triggerSearch();
+		this.props.clearOffset();
+		this.props.fetchMovies();
 	}
 
 	render() {
@@ -21,11 +22,13 @@ class SearchButton extends React.Component {
 }
 
 SearchButton.propTypes = {
-	triggerSearch: PropTypes.func.isRequired
+	clearOffset: PropTypes.func.isRequired,
+	fetchMovies: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-	triggerSearch
+	clearOffset,
+	fetchMovies
 };
 
 export const testHelper = { SearchButton };

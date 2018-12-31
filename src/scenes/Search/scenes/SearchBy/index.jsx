@@ -7,7 +7,7 @@ import { updateSearchBy } from '../../../../services/actionCreators';
 
 import './styles.css';
 
-export class SearchBy extends React.Component {
+class SearchBy extends React.Component {
 	handleButtonClick(searchBy) {
 		this.props.updateSearchBy(searchBy);
 	}

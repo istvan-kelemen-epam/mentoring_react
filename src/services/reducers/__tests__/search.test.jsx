@@ -1,4 +1,4 @@
-import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, TRIGGER_SEARCH, SEARCH_BY } from '../../actionTypes'; // eslint-disable-line
+import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, SEARCH_BY } from '../../actionTypes';
 import search from '../search';
 
 describe('services/reducers/search', () => {
@@ -36,15 +36,5 @@ describe('services/reducers/search', () => {
 		expect(searchState).toEqual({
 			searchBy
 		});
-	});
-
-	it('should trigger search', () => {
-		const originalSearchState = {};
-		const action = {
-			type: TRIGGER_SEARCH
-		};
-		const searchState = search({}, action);
-		expect(searchState).toEqual(originalSearchState);
-		expect(searchState).not.toBe(originalSearchState);
 	});
 });
