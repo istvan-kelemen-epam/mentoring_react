@@ -1,5 +1,22 @@
-import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, UPDATE_SORT_BY, FETCH_MOVIES, CLEAR_OFFSET, SEARCH_BY } from '../actionTypes';
-import { updateSearchExpression, updateSearchBy, updateSortBy, clearOffset, fetchMovies } from '../actionCreators';
+import {
+	UPDATE_SEARCH_EXPRESSION,
+	UPDATE_SEARCH_BY,
+	UPDATE_SORT_BY,
+	CLEAR_OFFSET,
+	FETCH_MOVIES,
+	FETCH_MOVIE_BY_ID,
+	SHOW_SEARCH,
+	SEARCH_BY
+} from '../actionTypes';
+import {
+	updateSearchExpression,
+	updateSearchBy,
+	updateSortBy,
+	clearOffset,
+	fetchMovies,
+	fetchMovieById,
+	showSearch
+} from '../actionCreators';
 
 describe('services/actionCreators', () => {
 	it('should create search expression action', () => {
@@ -124,6 +141,66 @@ describe('services/actionCreators', () => {
 			const getState = jest.fn(getStateMock);
 			movies = [{}];
 			fetchMoviesAsync(dispatch, getState);
+		});
+	});
+
+	describe('fetch movie by id action', () => {
+		let fetchMovieByIdAsync;
+		let fetch;
+		let movie;
+
+		beforeEach(() => {
+			fetchMovieByIdAsync = fetchMovieById();
+			fetch = window.fetch;
+			window.fetch = jest.fn(() => {
+				return Promise.resolve({
+					ok: true,
+					json: jest.fn(() => Promise.resolve(movie))
+				});
+			});
+		});
+
+		afterEach(() => {
+			window.fetch = fetch;
+		});
+
+		it('should create fetch movies async function', () => {
+			expect(fetchMovieByIdAsync).toBeInstanceOf(Function);
+		});
+
+		it('should throw error', () => {
+			const dispatch = jest.fn();
+			window.fetch = jest.fn(() => {
+				return {
+					then: func => {
+						func({
+							ok: false
+						});
+					}
+				};
+			});
+			expect(() => { fetchMovieByIdAsync(dispatch); }).toThrow();
+		});
+
+		it('should fetch for a movie by id', done => {
+			const dispatch = jest.fn(action => {
+				expect(action).toEqual({
+					type: FETCH_MOVIE_BY_ID,
+					payload: {
+						movie
+					}
+				});
+				done();
+			});
+			movie = {};
+			fetchMovieByIdAsync(dispatch);
+		});
+	});
+
+	it('should create show search action', () => {
+		const result = showSearch();
+		expect(result).toEqual({
+			type: SHOW_SEARCH
 		});
 	});
 });

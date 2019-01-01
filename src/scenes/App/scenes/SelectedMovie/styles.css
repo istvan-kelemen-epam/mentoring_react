@@ -1,0 +1,63 @@
+.selected-movie main {
+	display: flex;
+	justify-content: space-between;
+	background-color: #333;
+	padding: 0 4em 4em;
+}
+
+.selected-movie > main > article {
+	padding: 1em 0 0 2ex;
+}
+
+.selected-movie__poster {
+	flex-shrink: 0;
+	width: 500px;
+	height: 750px;
+	overflow: hidden;
+}
+
+.selected-movie__poster img {
+	width: 500px;
+}
+
+.selected-movie__title {
+	display: inline;
+	margin: 0 2ex 0 0;
+	padding: 0;
+	color: #F55363;
+}
+
+.selected-movie__vote_average {
+	display: inline-table;
+	color: #CEDAAE;
+}
+
+.selected-movie__vote_average span {
+	display: table-cell;
+    width: 5ex;
+    height: 5ex;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.selected-movie__tagline {
+	margin: 1em 0;
+	color: #CDC9C8;
+}
+
+.selected-movie__release_year {
+	margin-right: 4ex;
+}
+
+.selected-movie__overview {
+	margin-top: 2em;
+	color: #CDC9C8;
+}
+
+.selected-movie > footer {
+	padding: 1em;
+	background-color: #F5F5F5;
+	color: #000;
+}

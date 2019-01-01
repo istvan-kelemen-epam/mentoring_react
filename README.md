@@ -1,6 +1,6 @@
 # Mentoring program React JS
 
-## 4th Testing
+## 5th Redux
 
 ### Install
 
@@ -34,6 +34,8 @@ $ webpack-dev-server
 npm test
 ```
 
+All the statements, branches, functions and lines must be **100%** covered
+
 ### Update snapshots
 
 ```bash
@@ -50,10 +52,8 @@ $ npm test -- --coverage
 
 ### Notes
 
-**Still under development**
+**Search by Genre and films by Genre features are not implemented, because there is no example given to show how to pass string array in get parameter**, and none of the suggestions worked that I found on the internet.
 
-Search by "Genre" is not implemented, because there is no example given to show how to pass string array in get parameter, and none of the suggestions worked that I found on the interenet
-
-Contradicting to the specification where is stated that no limit is needed (in order to skip implementing pagination) I applied a maximum 60 items limit because for example in case when the search expression is only "a", then 2027 items are provided
+Contradicting to the specification where is stated that no limit is needed (in order to skip implementing pagination) I **applied a maximum 60 items limit because for example in case when the search expression is only "a", then 2027 items are provided**
 
 Empty search expression also returns the first 60 items in order to be able to freely browse the items for search expressions

@@ -1,3 +1,4 @@
+export const LOCALSTORAGE_APP_STATE_KEY = 'netflixroulette-app-state';
 export const LOCALSTORAGE_SEARCH_STATE_KEY = 'netflixroulette-search-state';
 export const LOCALSTORAGE_SORT_STATE_KEY = 'netflixroulette-sort-state';
 export const LOCALSTORAGE_MOVIES_STATE_KEY = 'netflixroulette-movies-state';
@@ -17,6 +18,14 @@ const pickState = key => {
 		console.err(e);
 	}
 	return parsedState;
+};
+
+export const saveAppState = searchState => {
+	saveState(LOCALSTORAGE_APP_STATE_KEY, searchState);
+};
+
+export const pickAppState = () => {
+	return pickState(LOCALSTORAGE_APP_STATE_KEY);
 };
 
 export const saveSearchState = searchState => {

@@ -11,7 +11,7 @@
 	width: 500px;
 	height: calc(750px + 5em);
 	margin-bottom: 3em;
-	/*background-color: #ccc;*/
+	cursor: pointer;
 }
 
 .result-list__item-poster {
@@ -35,7 +35,7 @@
     font-weight: bold;
 }
 
-.result-list__item-year {
+.result-list__item-release_year {
 	border: 1px solid #000;
 	float: right;
     padding: 0.125em 0.25em 0;

@@ -12,15 +12,36 @@ body {
 	font-size: medium; /* Just to clearly see the reference */
 }
 
-.main-header {
+.main-header, .main-footer {
 	padding: 1em 8em;
 	background-color: #333;
 	overflow: auto;
 }
 
-.main-caption {
+.main-header-caption-container {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 1em;
+}
+
+.main-header-caption, .main-footer-caption {
+	margin: 0;
 	font-size: 1rem;
 	color: #F55363;
 	text-shadow: 0 0 0.2ex #000;
-	padding-bottom: 1em;
+}
+
+.main-header-caption {
+	padding-top: 0.5em;
+}
+
+.main-header-show-search {
+	padding: 0.5em 1em;
+    border: 0;
+    border-radius: 0.5ex;
+    width: 20ex;
+    text-transform: uppercase;
+	color: #F55363;
+	background-color: #fff;
+    cursor: pointer;	
 }

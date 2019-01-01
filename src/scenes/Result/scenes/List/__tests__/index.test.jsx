@@ -49,4 +49,44 @@ describe('scenes/Result/scenes/List', () => {
 		expect(rendered.props.children.type).toBe('ul');
 		expect(rendered.props.children.props.children[0].type).toBe('li');
 	});
+
+	it('should show selected movie in detail', () => {
+		const list = Object.create(testHelper.List.prototype);
+		const e = {
+			target: {
+				classList: {
+					contains: () => false
+				},
+				dataset: {
+					id: 1
+				},
+				parentElement: {
+					classList: {
+						contains: () => true
+					},
+					dataset: {
+						id: 2
+					},
+					parentElement: {}
+				}
+			}
+		};
+		list.props = {
+			fetchMovieById: jest.fn()
+		};
+		list.handleClick(e);
+		expect(list.props.fetchMovieById).toHaveBeenCalledWith(2);
+	});
+
+	it('should not show selected movie in detail', () => {
+		const list = Object.create(testHelper.List.prototype);
+		const e = {
+			target: null
+		};
+		list.props = {
+			fetchMovieById: jest.fn()
+		};
+		list.handleClick(e);
+		expect(list.props.fetchMovieById).not.toHaveBeenCalled();
+	});
 });

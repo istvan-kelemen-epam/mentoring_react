@@ -4,6 +4,8 @@ import {
 	UPDATE_SORT_BY,
 	CLEAR_OFFSET,
 	FETCH_MOVIES,
+	FETCH_MOVIE_BY_ID,
+	SHOW_SEARCH,
 	SEARCH_BY
 } from './actionTypes';
 
@@ -71,3 +73,23 @@ export const fetchMovies = () => (dispatch, getState) => {
 		});
 	});
 };
+
+export const fetchMovieById = id => dispatch => {
+	fetch('http://react-cdp-api.herokuapp.com/movies/' + id).then(response => {
+		if (response.ok) {
+			return response.json();
+		}
+		throw new Error('Network error');
+	}).then(movie => {
+		dispatch({
+			type: FETCH_MOVIE_BY_ID,
+			payload: {
+				movie
+			}
+		});
+	});
+};
+
+export const showSearch = () => ({
+	type: SHOW_SEARCH
+});
