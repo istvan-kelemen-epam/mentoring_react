@@ -17,7 +17,7 @@ class Search extends React.Component {
 		return (
 			<section className="search">
 				<h2>Find your movie</h2>
-				<input type="text" placeholder="Search expression" value={this.props.searchExpression} onChange={this.handleInputChange.bind(this)} />
+				<input type="text" placeholder="Search expression (required)" value={this.props.searchExpression} onChange={this.handleInputChange.bind(this)} />
 				<section className="search__filter-panel">
 					<SearchBy />
 					<SearchButton />

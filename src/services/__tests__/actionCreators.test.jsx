@@ -9,6 +9,7 @@ import {
 	SEARCH_BY
 } from '../actionTypes';
 import {
+	testHelper,
 	updateSearchExpression,
 	updateSearchBy,
 	updateSortBy,
@@ -99,20 +100,6 @@ describe('services/actionCreators', () => {
 			expect(fetchMoviesAsync).toBeInstanceOf(Function);
 		});
 
-		it('should alert that search by genres is not implemented', () => {
-			const dispatch = jest.fn();
-			const getState = jest.fn(getStateMock.bind({}, {
-				search: { searchBy: SEARCH_BY.GENRE }
-			}));
-			const alert = window.alert;
-			window.alert = jest.fn();
-			fetchMoviesAsync(dispatch, getState);
-			expect(window.alert).toHaveBeenCalled();
-			expect(window.fetch).not.toHaveBeenCalled();
-			expect(dispatch).not.toHaveBeenCalled();
-			window.alert = alert;
-		});
-
 		it('should throw error', () => {
 			const dispatch = jest.fn();
 			const getState = jest.fn(getStateMock);
@@ -138,9 +125,19 @@ describe('services/actionCreators', () => {
 				});
 				done();
 			});
-			const getState = jest.fn(getStateMock);
 			movies = [{}];
-			fetchMoviesAsync(dispatch, getState);
+			{
+				const getState = jest.fn(getStateMock.bind({}, {
+					search: { searchBy: SEARCH_BY.TITLE }
+				}));
+				fetchMoviesAsync(dispatch, getState);
+			}
+			{
+				const getState = jest.fn(getStateMock.bind({}, {
+					search: { searchBy: SEARCH_BY.GENRE }
+				}));
+				fetchMoviesAsync(dispatch, getState);
+			}
 		});
 	});
 
@@ -183,16 +180,18 @@ describe('services/actionCreators', () => {
 		});
 
 		it('should fetch for a movie by id', done => {
+			const genre = 'genre';
 			const dispatch = jest.fn(action => {
 				expect(action).toEqual({
 					type: FETCH_MOVIE_BY_ID,
 					payload: {
-						movie
+						movie,
+						genre
 					}
 				});
 				done();
 			});
-			movie = {};
+			movie = { genres: [genre] };
 			fetchMovieByIdAsync(dispatch);
 		});
 	});
@@ -201,6 +200,22 @@ describe('services/actionCreators', () => {
 		const result = showSearch();
 		expect(result).toEqual({
 			type: SHOW_SEARCH
+		});
+	});
+
+	describe('getFirstGenre', () => {
+		it('should return the first genre', () => {
+			const genre1 = 'genre 1';
+			const genre2 = 'genre 2';
+			const genres = [genre1, genre2];
+			const result = testHelper.getFirstGenre(genres);
+			expect(result).toBe(genre1);
+		});
+
+		it('should return empty string', () => {
+			const genres = [];
+			const result = testHelper.getFirstGenre(genres);
+			expect(result).toBe('');
 		});
 	});
 });

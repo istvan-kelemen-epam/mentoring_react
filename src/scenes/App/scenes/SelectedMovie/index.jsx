@@ -39,6 +39,7 @@ class SelectedMovie extends React.Component {
 					</article>
 				</main>
 				<footer className="selected-movie__footer">
+					<div>Films by {movie.genre} genre</div>
 				</footer>
 			</section>
 		);

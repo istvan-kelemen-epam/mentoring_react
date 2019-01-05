@@ -34,30 +34,16 @@ export const clearOffset = () => ({
 	type: CLEAR_OFFSET
 });
 
-export const fetchMovies = () => (dispatch, getState) => {
+const fetchMoviesBySearchBy = (type, searchBy, searchExpression, dispatch, getState) => {
 	const state = getState();
-	const searchBy = state.search.searchBy;
 	const params = [];
 
 	params.push('limit=' + state.movies.limit);
 	params.push('offset=' + state.movies.offset);
 	params.push('sortBy=' + state.sort.sortBy);
 	params.push('sortOrder=asc');
-
-	switch (searchBy) {
-	case SEARCH_BY.TITLE: {
-		params.push('searchBy=title');
-		params.push('search=' + encodeURIComponent(state.search.searchExpression));
-		break;
-	}
-	case SEARCH_BY.GENRE: {
-		const message = 'Search by Genres is not implemented, ' +
-			'because it is not documented how to call with string array ' +
-			'and none of these suggestions worked correctly: https://medium.com/raml-api/arrays-in-query-params-33189628fa68';
-		alert(message);
-		return;
-	}
-	}
+	params.push('search=' + encodeURIComponent(searchExpression));
+	params.push('searchBy=' + (searchBy === SEARCH_BY.TITLE ? 'title' : 'genres'));
 
 	fetch('http://react-cdp-api.herokuapp.com/movies/?' + params.join('&')).then(response => {
 		if (response.ok) {
@@ -66,7 +52,7 @@ export const fetchMovies = () => (dispatch, getState) => {
 		throw new Error('Network error');
 	}).then(movies => {
 		dispatch({
-			type: FETCH_MOVIES,
+			type: type,
 			payload: {
 				movies
 			}
@@ -74,22 +60,44 @@ export const fetchMovies = () => (dispatch, getState) => {
 	});
 };
 
-export const fetchMovieById = id => dispatch => {
+export const fetchMovies = () => (dispatch, getState) => {
+	const state = getState();
+	const searchBy = state.search.searchBy;
+	const searchExpression = state.search.searchExpression;
+
+	fetchMoviesBySearchBy(FETCH_MOVIES, searchBy, searchExpression, dispatch, getState);
+};
+
+const fetchMoviesByGenre = (genre, dispatch, getState) => {
+	const searchBy = SEARCH_BY.GENRE;
+	const searchExpression = genre;
+
+	fetchMoviesBySearchBy(FETCH_MOVIES, searchBy, searchExpression, dispatch, getState);
+};
+
+const getFirstGenre = (genres) => genres && genres.length ? genres[0] : '';
+
+export const fetchMovieById = id => (dispatch, getState) => {
 	fetch('http://react-cdp-api.herokuapp.com/movies/' + id).then(response => {
 		if (response.ok) {
 			return response.json();
 		}
 		throw new Error('Network error');
 	}).then(movie => {
+		const genre = getFirstGenre(movie.genres);
 		dispatch({
 			type: FETCH_MOVIE_BY_ID,
 			payload: {
-				movie
+				movie,
+				genre
 			}
 		});
+		fetchMoviesByGenre(genre, dispatch, getState);
 	});
 };
 
 export const showSearch = () => ({
 	type: SHOW_SEARCH
 });
+
+export const testHelper = { getFirstGenre };
