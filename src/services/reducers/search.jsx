@@ -1,12 +1,9 @@
 import { UPDATE_SEARCH_EXPRESSION, UPDATE_SEARCH_BY, SEARCH_BY } from '../actionTypes';
-import { pickSearchState } from '../storeUtils';
-
-const pickedSearchState = pickSearchState();
 
 const initialState = Object.assign({
 	searchExpression: '',
 	searchBy: SEARCH_BY.TITLE
-}, pickedSearchState);
+});
 
 export default (state = initialState, action) => {
 	switch (action.type) {

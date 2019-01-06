@@ -1,13 +1,13 @@
 # Mentoring program React JS
 
-## 5th Redux
+## 6th Router
 
 ### Install
 
 ```bash
 $ git clone https://github.com/istvan-kelemen-epam/mentoring_react.git
 $ cd mentoring_react
-$ git checkout 5_redux
+$ git checkout 6_router
 $ npm install -g webpack webpack-cli # if not installed on the machine yet
 $ npm install -g babel-core babel-cli # if not installed on the machine yet
 $ npm install -g html-webpack-plugin # if not installed on the machine yet
@@ -52,4 +52,4 @@ $ npm test -- --coverage
 
 ### Notes
 
-Contradicting to the specification where is stated that no limit is needed (in order to skip implementing pagination) I **applied a maximum 60 items limit because for example in case when the search expression is only "a", then 2027 items are provided**
+**Under development**

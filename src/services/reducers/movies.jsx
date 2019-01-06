@@ -1,13 +1,10 @@
 import { CLEAR_OFFSET, FETCH_MOVIES } from '../actionTypes';
-import { pickMoviesState } from '../storeUtils';
-
-const pickedMoviesState = pickMoviesState();
 
 const initialState = Object.assign({
 	limit: 60, // In the specification stated that no limit is needed, but for example when searching for "a", then 2027 items come
 	offset: 0,
 	total: 0
-}, pickedMoviesState);
+});
 
 export default (state = initialState, action) => {
 	switch (action.type) {

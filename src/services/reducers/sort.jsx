@@ -1,11 +1,8 @@
 import { UPDATE_SORT_BY } from '../actionTypes';
-import { pickSortState } from '../storeUtils';
-
-const pickedSortState = pickSortState();
 
 const initialState = Object.assign({
 	sortBy: 'release_date'
-}, pickedSortState);
+});
 
 export default (state = initialState, action) => {
 	switch (action.type) {

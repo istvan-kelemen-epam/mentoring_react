@@ -1,5 +1,5 @@
 {
-  "name": "5_redux",
+  "name": "6_router",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -14,6 +14,7 @@
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },

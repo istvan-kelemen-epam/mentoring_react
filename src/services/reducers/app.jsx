@@ -1,11 +1,8 @@
 import { FETCH_MOVIE_BY_ID, SHOW_SEARCH } from '../actionTypes';
-import { pickAppState } from '../storeUtils';
-
-const pickedAppState = pickAppState();
 
 const initialState = Object.assign({
 	selectedMovie: null
-}, pickedAppState);
+});
 
 export default (state = initialState, action) => {
 	switch (action.type) {
