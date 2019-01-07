@@ -35,27 +35,31 @@ export const clearOffset = () => ({
 });
 
 const fetchMoviesBySearchBy = (type, searchBy, searchExpression, dispatch, getState) => {
-	const state = getState();
-	const params = [];
+	return new Promise((resolve, reject) => {
+		const state = getState();
+		const params = [];
 
-	params.push('limit=' + state.movies.limit);
-	params.push('offset=' + state.movies.offset);
-	params.push('sortBy=' + state.sort.sortBy);
-	params.push('sortOrder=asc');
-	params.push('search=' + encodeURIComponent(searchExpression));
-	params.push('searchBy=' + (searchBy === SEARCH_BY.TITLE ? 'title' : 'genres'));
+		params.push('limit=' + state.movies.limit);
+		params.push('offset=' + state.movies.offset);
+		params.push('sortBy=' + state.sort.sortBy);
+		params.push('sortOrder=asc');
+		params.push('search=' + encodeURIComponent(searchExpression));
+		params.push('searchBy=' + (searchBy === SEARCH_BY.TITLE ? 'title' : 'genres'));
 
-	fetch('http://react-cdp-api.herokuapp.com/movies/?' + params.join('&')).then(response => {
-		if (response.ok) {
-			return response.json();
-		}
-		throw new Error('Network error');
-	}).then(movies => {
-		dispatch({
-			type: type,
-			payload: {
-				movies
+		fetch('http://react-cdp-api.herokuapp.com/movies/?' + params.join('&')).then(response => {
+			if (response.ok) {
+				return response.json();
 			}
+			reject();
+			throw new Error('Network error');
+		}).then(movies => {
+			dispatch({
+				type: type,
+				payload: {
+					movies
+				}
+			});
+			resolve();
 		});
 	});
 };
@@ -65,7 +69,7 @@ export const fetchMovies = () => (dispatch, getState) => {
 	const searchBy = state.search.searchBy;
 	const searchExpression = state.search.searchExpression;
 
-	fetchMoviesBySearchBy(FETCH_MOVIES, searchBy, searchExpression, dispatch, getState);
+	return fetchMoviesBySearchBy(FETCH_MOVIES, searchBy, searchExpression, dispatch, getState);
 };
 
 const fetchMoviesByGenre = (genre, dispatch, getState) => {

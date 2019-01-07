@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { showSearch } from '../../services/actionCreators';
+import { ROUTE } from '../../services/routerUtils';
+import { updateSearchExpression, fetchMovies, showSearch } from '../../services/actionCreators';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
 import Search from '../Search';
 import SortBy from '../SortBy';
@@ -12,6 +14,20 @@ import SelectedMovie from './scenes/SelectedMovie';
 import './styles.css';
 
 class App extends React.Component {
+	constructor(props) {
+		super();
+		if (props.match.path === ROUTE.SEARCH) {
+			const searchExpression = this.getSearchExpressionParam(props);
+			if (searchExpression) {
+				props.updateSearchExpression(searchExpression);
+			}
+		}
+	}
+
+	getSearchExpressionParam(props) {
+		return (props.match.params.searchExpression || '').trim();
+	}
+
 	handleShowSearchButtonClick() {
 		this.props.showSearch();
 	}
@@ -36,6 +52,14 @@ class App extends React.Component {
 					? <SelectedMovie />
 					: <ErrorBoundary><SortBy /></ErrorBoundary>
 				}
+				<Route exact path={ROUTE.SEARCH}>
+					{(() => {
+						const searchExpression = this.getSearchExpressionParam(this.props);
+						if (searchExpression) {
+							this.props.fetchMovies();
+						}
+					})()}
+				</Route>
 				<ErrorBoundary><Result /></ErrorBoundary>
 				<section className="main-footer">
 					<h1 className="main-footer-caption">netflixroulette</h1>
@@ -46,6 +70,9 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+	match: PropTypes.object,
+	updateSearchExpression: PropTypes.func.isRequired,
+	fetchMovies: PropTypes.func.isRequired,
 	selectedMovie: PropTypes.object,
 	showSearch: PropTypes.func.isRequired
 };
@@ -60,9 +87,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+	updateSearchExpression,
+	fetchMovies,
 	showSearch
 };
 
 export const testHelper = { App };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
