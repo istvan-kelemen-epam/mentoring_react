@@ -1,3 +1,4 @@
 export const ROUTE = {
-	SEARCH: '/search/:searchExpression'
+	SEARCH: '/search/:searchExpression',
+	FILM: '/film/:id'
 };

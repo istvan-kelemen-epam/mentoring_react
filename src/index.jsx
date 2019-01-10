@@ -15,6 +15,7 @@ ReactDom.render(
 		<Router>
 			<Switch>
 				<Route exact path={ROUTE.SEARCH} component={App} />
+				<Route exact path={ROUTE.FILM} component={App} />
 				<Route exact path="/" component={App} />
 				<Route component={NotFound} />
 			</Switch>

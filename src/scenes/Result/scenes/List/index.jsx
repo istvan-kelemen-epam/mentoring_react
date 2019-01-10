@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import { fetchMovieById } from '../../../../services/actionCreators';
 
 import './styles.css';
 
@@ -13,7 +12,7 @@ class List extends React.Component {
 			element = element.parentElement;
 		}
 		if (element) {
-			this.props.fetchMovieById(element.dataset.id);
+			this.props.history.push('/film/' + element.dataset.id);
 		}
 	}
 
@@ -38,18 +37,14 @@ class List extends React.Component {
 }
 
 List.propTypes = {
-	movies: PropTypes.object.isRequired,
-	fetchMovieById: PropTypes.func.isRequired
+	history: PropTypes.object.isRequired,
+	movies: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
 	return { movies: state.movies };
 };
 
-const mapDispatchToProps = {
-	fetchMovieById
-};
-
 export const testHelper = { List };
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default withRouter(connect(mapStateToProps)(List));

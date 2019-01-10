@@ -3,6 +3,7 @@ import {
 	UPDATE_SEARCH_BY,
 	UPDATE_SORT_BY,
 	CLEAR_OFFSET,
+	CLEAR_MOVIES,
 	FETCH_MOVIES,
 	FETCH_MOVIE_BY_ID,
 	SHOW_SEARCH,
@@ -79,6 +80,10 @@ const fetchMoviesByGenre = (genre, dispatch, getState) => {
 	fetchMoviesBySearchBy(FETCH_MOVIES, searchBy, searchExpression, dispatch, getState);
 };
 
+const clearMovies = () => ({
+	type: CLEAR_MOVIES
+});
+
 const getFirstGenre = (genres) => genres && genres.length ? genres[0] : '';
 
 export const fetchMovieById = id => (dispatch, getState) => {
@@ -100,8 +105,12 @@ export const fetchMovieById = id => (dispatch, getState) => {
 	});
 };
 
-export const showSearch = () => ({
-	type: SHOW_SEARCH
-});
+export const showSearch = () => dispatch => {
+	dispatch(updateSearchExpression(''));
+	dispatch(clearMovies());
+	dispatch({
+		type: SHOW_SEARCH
+	});
+};
 
 export const testHelper = { getFirstGenre };

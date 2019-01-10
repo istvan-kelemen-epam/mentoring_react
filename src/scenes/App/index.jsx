@@ -4,7 +4,8 @@ import { withRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { ROUTE } from '../../services/routerUtils';
-import { updateSearchExpression, fetchMovies, showSearch } from '../../services/actionCreators';
+
+import { updateSearchExpression, fetchMovies, fetchMovieById, showSearch } from '../../services/actionCreators';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
 import Search from '../Search';
 import SortBy from '../SortBy';
@@ -29,12 +30,30 @@ class App extends React.Component {
 	}
 
 	handleShowSearchButtonClick() {
+		this.props.history.push('/');
 		this.props.showSearch();
 	}
 
 	render() {
 		return (
 			<main>
+				<Route exact path={ROUTE.SEARCH}>
+					{(() => {
+						const searchExpression = this.getSearchExpressionParam(this.props);
+						if (searchExpression) {
+							this.props.fetchMovies();
+						}
+					})()}
+				</Route>
+				<Route exact path={ROUTE.FILM}>
+					{(() => {
+						const id = this.props.match.params.id;
+						const selectedMovieId = this.props.selectedMovie && this.props.selectedMovie.id;
+						if (id && id != selectedMovieId) {
+							this.props.fetchMovieById(id);
+						}
+					})()}
+				</Route>
 				<section className="main-header">
 					<div className="main-header-caption-container">
 						<h1 className="main-header-caption">netflixroulette</h1>
@@ -52,14 +71,6 @@ class App extends React.Component {
 					? <SelectedMovie />
 					: <ErrorBoundary><SortBy /></ErrorBoundary>
 				}
-				<Route exact path={ROUTE.SEARCH}>
-					{(() => {
-						const searchExpression = this.getSearchExpressionParam(this.props);
-						if (searchExpression) {
-							this.props.fetchMovies();
-						}
-					})()}
-				</Route>
 				<ErrorBoundary><Result /></ErrorBoundary>
 				<section className="main-footer">
 					<h1 className="main-footer-caption">netflixroulette</h1>
@@ -70,10 +81,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+	history: PropTypes.object.isRequired,
 	match: PropTypes.object,
 	updateSearchExpression: PropTypes.func.isRequired,
 	fetchMovies: PropTypes.func.isRequired,
 	selectedMovie: PropTypes.object,
+	fetchMovieById: PropTypes.func.isRequired,
 	showSearch: PropTypes.func.isRequired
 };
 
@@ -89,6 +102,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
 	updateSearchExpression,
 	fetchMovies,
+	fetchMovieById,
 	showSearch
 };
 
