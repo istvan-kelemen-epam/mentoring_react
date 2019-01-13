@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { store } from '../../../services/createStore';
 import { testHelper as selectedMovieTestHelper } from '../scenes/SelectedMovie';
@@ -22,7 +23,9 @@ describe('scenes/App', () => {
 		it('should do it without selected movie', () => {
 			const tree = renderer.create(
 				<Provider store={store}>
-					<App />
+					<Router>
+						<App />
+					</Router>
 				</Provider>
 			).toJSON();
 			expect(tree).toMatchSnapshot();
@@ -48,7 +51,9 @@ describe('scenes/App', () => {
 			}));
 			const tree = renderer.create(
 				<Provider store={store}>
-					<App />
+					<Router>
+						<App />
+					</Router>
 				</Provider>
 			).toJSON();
 			expect(tree).toMatchSnapshot();
@@ -57,7 +62,12 @@ describe('scenes/App', () => {
 
 	it('should show search', () => {
 		const app = Object.create(testHelper.App.prototype);
-		app.props = { showSearch: jest.fn() };
+		app.props = {
+			history: {
+				push: jest.fn()
+			},
+			showSearch: jest.fn()
+		};
 		app.handleShowSearchButtonClick();
 		expect(app.props.showSearch).toHaveBeenCalled();
 	});

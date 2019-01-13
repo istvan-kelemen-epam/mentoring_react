@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { store } from '../../../../../services/createStore';
 import SearchButton, { testHelper } from '..';
@@ -10,7 +11,9 @@ describe('scenes/SearchButton', () => {
 	it('should create snapshot', () => {
 		const tree = renderer.create(
 			<Provider store={store}>
-				<SearchButton />
+				<Router>
+					<SearchButton />
+				</Router>
 			</Provider>
 		).toJSON();
 		expect(tree).toMatchSnapshot();
@@ -22,7 +25,14 @@ describe('scenes/SearchButton', () => {
 		const fetchMovies = jest.fn();
 		const searchButton = Object.create(testHelper.SearchButton.prototype);
 
-		searchButton.props = { searchExpression, clearOffset, fetchMovies };
+		searchButton.props = {
+			history: {
+				push: jest.fn()
+			},
+			searchExpression,
+			clearOffset,
+			fetchMovies
+		};
 		searchButton.handleClick();
 
 		expect(clearOffset).toHaveBeenCalled();

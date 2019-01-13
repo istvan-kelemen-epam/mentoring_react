@@ -100,21 +100,6 @@ describe('services/actionCreators', () => {
 			expect(fetchMoviesAsync).toBeInstanceOf(Function);
 		});
 
-		it('should throw error', () => {
-			const dispatch = jest.fn();
-			const getState = jest.fn(getStateMock);
-			window.fetch = jest.fn(() => {
-				return {
-					then: func => {
-						func({
-							ok: false
-						});
-					}
-				};
-			});
-			expect(() => { fetchMoviesAsync(dispatch, getState); }).toThrow();
-		});
-
 		it('should fetch for movies', done => {
 			const dispatch = jest.fn(action => {
 				expect(action).toEqual({
@@ -197,8 +182,10 @@ describe('services/actionCreators', () => {
 	});
 
 	it('should create show search action', () => {
-		const result = showSearch();
-		expect(result).toEqual({
+		const dispatch = jest.fn();
+		const showSearchAsync = showSearch();
+		showSearchAsync(dispatch);
+		expect(dispatch).toHaveBeenCalledWith({
 			type: SHOW_SEARCH
 		});
 	});

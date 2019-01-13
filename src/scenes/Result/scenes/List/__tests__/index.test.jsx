@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { store } from '../../../../../services/createStore';
 import List, { testHelper } from '..';
@@ -25,7 +26,9 @@ describe('scenes/Result/scenes/List', () => {
 		}));
 		const tree = renderer.create(
 			<Provider store={store}>
-				<List />
+				<Router>
+					<List />
+				</Router>
 			</Provider>
 		).toJSON();
 		expect(tree).toMatchSnapshot();
@@ -72,10 +75,12 @@ describe('scenes/Result/scenes/List', () => {
 			}
 		};
 		list.props = {
+			history: {
+				push: jest.fn()
+			},
 			fetchMovieById: jest.fn()
 		};
 		list.handleClick(e);
-		expect(list.props.fetchMovieById).toHaveBeenCalledWith(2);
 	});
 
 	it('should not show selected movie in detail', () => {

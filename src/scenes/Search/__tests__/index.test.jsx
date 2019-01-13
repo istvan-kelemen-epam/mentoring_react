@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { store } from '../../../services/createStore';
 import Search, { testHelper } from '..';
@@ -10,7 +11,9 @@ describe('scenes/Search', () => {
 	it('should create snapshot', () => {
 		const tree = renderer.create(
 			<Provider store={store}>
-				<Search />
+				<Router>
+					<Search />
+				</Router>
 			</Provider>
 		).toJSON();
 		expect(tree).toMatchSnapshot();

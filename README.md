@@ -28,28 +28,10 @@ $ webpack-dev-server
 
 ...and then paste the http://localhost:8080/ URI to the browser's location bar
 
-### Test
+### Test was not required
 
-```bash
-npm test
-```
-
-All the statements, branches, functions and lines must be **100%** covered
-
-### Update snapshots
-
-```bash
-$ npm test -- -u
-```
-
-### Coverage
-
-```bash
-$ npm test -- --coverage
-```
-
-...and then look at `coverage/lcov-report/index.html` in browser
+But none of them fails.
 
 ### Notes
 
-**Under development**
+As the path specification for search stated only one unique path `localhost/search/Search%20Query` it makes impossible to apply it to both by title or genre. I applied it only to title.
