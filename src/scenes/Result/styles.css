@@ -1,0 +1,10 @@
+.result {
+	margin: 3em 24px;
+	background-color: #fff;
+	color: #000;
+}
+
+.result__not-found {
+	font-size: xx-large;
+	text-align: center;
+}
