@@ -87,21 +87,25 @@ const clearMovies = () => ({
 const getFirstGenre = (genres) => genres && genres.length ? genres[0] : '';
 
 export const fetchMovieById = id => (dispatch, getState) => {
-	fetch('http://react-cdp-api.herokuapp.com/movies/' + id).then(response => {
-		if (response.ok) {
-			return response.json();
-		}
-		throw new Error('Network error');
-	}).then(movie => {
-		const genre = getFirstGenre(movie.genres);
-		dispatch({
-			type: FETCH_MOVIE_BY_ID,
-			payload: {
-				movie,
-				genre
+	return new Promise((resolve, reject) => {
+		fetch('http://react-cdp-api.herokuapp.com/movies/' + id).then(response => {
+			if (response.ok) {
+				return response.json();
 			}
+			reject();
+			throw new Error('Network error');
+		}).then(movie => {
+			const genre = getFirstGenre(movie.genres);
+			dispatch({
+				type: FETCH_MOVIE_BY_ID,
+				payload: {
+					movie,
+					genre
+				}
+			});
+			fetchMoviesByGenre(genre, dispatch, getState);
+			resolve();
 		});
-		fetchMoviesByGenre(genre, dispatch, getState);
 	});
 };
 

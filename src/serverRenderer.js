@@ -3,6 +3,8 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
 import createStore from './services/createStore';
+import { ROUTE } from './services/routerUtils';
+import { fetchMovies, fetchMovieById } from './services/actionCreators';
 
 function renderHTML(html, preloadedState) {
 	return `
@@ -32,28 +34,45 @@ export default function serverRenderer() {
 		// This context object contains the results of the render
 		const context = {};
 
-		const root = (
-			<Root
-				context={context}
-				location={req.url}
-				Router={StaticRouter}
-				store={store}
-			/>
-		);
+		let promise;
 
-		const htmlString = renderToString(root);
-
-		// context.url will contain the URL to redirect to if a <Redirect> was used
-		if (context.url) {
-			res.writeHead(302, {
-				Location: context.url,
-			});
-			res.end();
-			return;
+		if (new RegExp(ROUTE.SEARCH.replace(/:.*/, '')).test(req.url)) {
+			promise = fetchMovies()(store.dispatch, store.getState);
+		} else if (new RegExp(ROUTE.FILM.replace(/:.*/, '')).test(req.url)) {
+			try {
+				let id = /\/([\d]+)\/?$/.exec(req.url)[1];
+				promise = fetchMovieById(id)(store.dispatch, store.getState);
+			} catch(e) {
+				promise = Promise.resolve();
+			}
+		} else {
+			promise = Promise.resolve();
 		}
 
-		const preloadedState = store.getState();
+		promise.then(() => {
+			const root = (
+				<Root
+					context={context}
+					location={req.url}
+					Router={StaticRouter}
+					store={store}
+				/>
+			);
 
-		res.send(renderHTML(htmlString, preloadedState));
+			const htmlString = renderToString(root);
+
+			// context.url will contain the URL to redirect to if a <Redirect> was used
+			if (context.url) {
+				res.writeHead(302, {
+					Location: context.url,
+				});
+				res.end();
+				return;
+			}
+
+			const preloadedState = store.getState();
+
+			res.send(renderHTML(htmlString, preloadedState));
+		});
 	};
 }
