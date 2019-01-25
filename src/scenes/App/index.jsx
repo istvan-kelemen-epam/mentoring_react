@@ -59,7 +59,9 @@ class App extends React.Component {
 						<h1 className="main-header-caption">netflixroulette</h1>
 						<div className="main-header-show-search-container">
 							{this.props.selectedMovie &&
-								<button className="main-header-show-search" onClick={this.handleShowSearchButtonClick.bind(this)}>Search</button>
+								<button className="main-header-show-search" onClick={this.handleShowSearchButtonClick.bind(this)}>
+									Search
+								</button>
 							}
 						</div>
 					</div>

@@ -1,16 +1,13 @@
 # Mentoring program React JS
 
-## 7th Server Side Rendering
+## 8th Useful libraries
 
 ### Install
 
 ```bash
 $ git clone https://github.com/istvan-kelemen-epam/mentoring_react.git
 $ cd mentoring_react
-$ git checkout 7_server-side-rendering
-$ npm install -g webpack webpack-cli # if not installed on the machine yet
-$ npm install -g babel-core babel-cli # if not installed on the machine yet
-$ npm install -g html-webpack-plugin # if not installed on the machine yet
+$ git checkout 8_useful-libraries
 $ npm install
 ```
 
@@ -35,4 +32,5 @@ There is no test
 
 ### Notes
 
-Code splitting requirement is implemented in the `webpack/webpack.config.common.js` based on https://webpack.js.org/guides/code-splitting/#prevent-duplication
+Airbnb eslint settings shown on the presentation and in the video applied* - the code cleaned (there were only some long line warning found).\
+*prop-types rule was not applied, because it does not make sense in lots of files (not React files or React files with no props)

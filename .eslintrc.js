@@ -1,5 +1,10 @@
 module.exports = {
-	"extends": "airbnb",
+	"extends": "airbnb-base",
+	"plugins": [
+		"import",
+		"react",
+		"jsx-a11y"
+	],
 	"parser": "babel-eslint",
 	"env": {
 		"browser": true,
@@ -20,6 +25,12 @@ module.exports = {
 		}
 	},
 	"rules": {
+		"max-len": [
+			1, 120, 2,
+			{"ignoreComments": true}
+		],
+		"react/jsx-uses-react": "error",
+		"react/jsx-uses-vars": "error",
 		"indent": [
 			"error",
 			"tab"
@@ -28,25 +39,6 @@ module.exports = {
 			"error",
 			"single"
 		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"no-console": [
-			"off",
-			"always"
-		],
-		"global-require": [
-			"off",
-			"always"
-		],
-		"import/no-extraneous-dependencies": [
-			"off",
-			"always"
-		],
-		"react/jsx-filename-extension": [
-			"off",
-			"always"
-		]
+		"semi": "error"
 	}
 };
