@@ -1,12 +1,16 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import './styles.css';
 
-class SelectedMovie extends React.Component {
+type Props = {
+	selectedMovie: Object
+}
+
+class SelectedMovie extends React.Component<Props> {
 	componentDidMountOrUpdate() {
-		document.querySelector('.main-header-show-search').scrollIntoView();
+		(document: Object).querySelector('.main-header-show-search').scrollIntoView();
 	}
 
 	componentDidMount() {
@@ -46,12 +50,8 @@ class SelectedMovie extends React.Component {
 	}
 }
 
-SelectedMovie.propTypes = {
-	selectedMovie: PropTypes.object
-};
-
 const mapStateToProps = state => {
 	return { selectedMovie: state.app.selectedMovie };
 };
 
-export default connect(mapStateToProps)(SelectedMovie);
+export default (connect: Function)(mapStateToProps)(SelectedMovie);

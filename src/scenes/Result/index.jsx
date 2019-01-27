@@ -1,12 +1,16 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import List from './scenes/List';
 
 import './styles.css';
 
-class Result extends React.Component {
+type Props = {
+	movies: Object;
+}
+
+class Result extends React.Component<Props> {
 	render() {
 		let result = null;
 		if (this.props.movies.data) {
@@ -24,14 +28,8 @@ class Result extends React.Component {
 	}
 }
 
-Result.propTypes = {
-	movies: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => {
 	return { movies: state.movies };
 };
 
-export const testHelper = { Result };
-
-export default connect(mapStateToProps)(Result);
+export default (connect: Function)(mapStateToProps)(Result);

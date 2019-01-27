@@ -1,14 +1,19 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { SEARCH_BY } from '../../../../services/actionTypes';
 import { updateSearchBy } from '../../../../services/actionCreators';
 
 import './styles.css';
 
-class SearchBy extends React.Component {
-	handleButtonClick(searchBy) {
+type Props = {
+	searchBy: String;
+	updateSearchBy: Function;
+}
+
+class SearchBy extends React.Component<Props> {
+	handleButtonClick(searchBy: $PropertyType<Props, 'searchBy'>) {
 		this.props.updateSearchBy(searchBy);
 	}
 
@@ -35,11 +40,6 @@ class SearchBy extends React.Component {
 	}
 }
 
-SearchBy.propTypes = {
-	searchBy: PropTypes.string.isRequired,
-	updateSearchBy: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => {
 	return { searchBy: state.search.searchBy };
 };
@@ -48,4 +48,4 @@ const mapDispatchToProps = {
 	updateSearchBy
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBy);
+export default (connect: Function)(mapStateToProps, mapDispatchToProps)(SearchBy);

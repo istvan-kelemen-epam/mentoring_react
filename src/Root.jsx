@@ -1,7 +1,7 @@
+// @flow
 import 'isomorphic-fetch';
 import 'babel-polyfill';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -10,7 +10,19 @@ import App from './scenes/App';
 import NotFound from './scenes/NotFound';
 import { ROUTE } from './services/routerUtils';
 
-const Root = ({ Router, location, context, store }) => (
+type Props = {
+	Router: Function;
+	location?: ?String;
+	context: {
+		url?: ?String;
+	},
+	store: {
+		dispatch: Function;
+		getState: Function;
+	};
+}
+
+const Root = ({ Router, location, context, store }: Props) => (
 	<Provider store={store}>
 		<Router location={location} context={context}>
 			<Switch>
@@ -23,20 +35,9 @@ const Root = ({ Router, location, context, store }) => (
 	</Provider>
 );
 
-Root.propTypes = {
-	Router: PropTypes.func.isRequired,
-	location: PropTypes.string,
-	context: PropTypes.shape({
-		url: PropTypes.string,
-	}),
-	store: PropTypes.shape({
-		dispatch: PropTypes.func.isRequired,
-		getState: PropTypes.func.isRequired,
-	}).isRequired,
-};
 Root.defaultProps = {
 	location: null,
 	context: null,
 };
 
-export default hot(module)(Root);
+export default (hot: Function)(module)(Root);

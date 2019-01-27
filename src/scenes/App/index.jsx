@@ -1,7 +1,7 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { ROUTE } from '../../services/routerUtils';
 
@@ -14,7 +14,19 @@ import SelectedMovie from './scenes/SelectedMovie';
 
 import './styles.css';
 
-class App extends React.Component {
+type Props = {
+	history: Object;
+	match: Object;
+	updateSearchExpression: Function;
+	fetchMovies: Function;
+	selectedMovie?: ?Object;
+	fetchMovieById: Function;
+	showSearch: Function;
+}
+
+class App extends React.Component<Props> {
+	static SEARCH_BY: Object;
+
 	constructor(props) {
 		super();
 		if (props.match.path === ROUTE.SEARCH) {
@@ -25,7 +37,7 @@ class App extends React.Component {
 		}
 	}
 
-	getSearchExpressionParam(props) {
+	getSearchExpressionParam(props: Props) {
 		return (props.match.params.searchExpression || '').trim();
 	}
 
@@ -81,16 +93,6 @@ class App extends React.Component {
 		);
 	}
 }
-
-App.propTypes = {
-	history: PropTypes.object.isRequired,
-	match: PropTypes.object,
-	updateSearchExpression: PropTypes.func.isRequired,
-	fetchMovies: PropTypes.func.isRequired,
-	selectedMovie: PropTypes.object,
-	fetchMovieById: PropTypes.func.isRequired,
-	showSearch: PropTypes.func.isRequired
-};
 
 App.SEARCH_BY = {
 	TITLE: 1,

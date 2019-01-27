@@ -1,11 +1,16 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import './styles.css';
 
-class List extends React.Component {
+type Props = {
+	history: Object;
+	movies: Object;
+}
+
+class List extends React.Component<Props> {
 	handleClick(e) {
 		let element = e.target;
 		while (element && !element.classList.contains('result-list__item')) {
@@ -36,15 +41,8 @@ class List extends React.Component {
 	}
 }
 
-List.propTypes = {
-	history: PropTypes.object.isRequired,
-	movies: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => {
 	return { movies: state.movies };
 };
-
-export const testHelper = { List };
 
 export default withRouter(connect(mapStateToProps)(List));

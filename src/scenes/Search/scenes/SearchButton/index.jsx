@@ -1,14 +1,22 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { SEARCH_BY } from '../../../../services/actionTypes';
 import { clearOffset, fetchMovies } from '../../../../services/actionCreators';
 
 import './styles.css';
 
-class SearchButton extends React.Component {
+type Props = {
+	history: Object;
+	searchBy: String;
+	searchExpression?: ?String;
+	clearOffset: Function;
+	fetchMovies: Function;
+}
+
+class SearchButton extends React.Component<Props> {
 	handleClick() {
 		const searchExpression = (this.props.searchExpression || '').trim();
 		if (searchExpression) {
@@ -31,14 +39,6 @@ class SearchButton extends React.Component {
 		);
 	}
 }
-
-SearchButton.propTypes = {
-	history: PropTypes.object.isRequired,
-	searchBy: PropTypes.string.isRequired,
-	searchExpression: PropTypes.string,
-	clearOffset: PropTypes.func.isRequired,
-	fetchMovies: PropTypes.func.isRequired
-};
 
 const mapStateToProps = state => {
 	return {

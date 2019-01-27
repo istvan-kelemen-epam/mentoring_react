@@ -1,13 +1,21 @@
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { updateSortBy, clearOffset, fetchMovies } from '../../services/actionCreators';
 
 import './styles.css';
 
-class SortBy extends React.Component {
-	handleSelectChange(e) {
+type Props = {
+	total: any;
+	sortBy: String;
+	updateSortBy: Function;
+	clearOffset: Function;
+	fetchMovies: Function;
+}
+
+class SortBy extends React.Component<Props> {
+	handleSelectChange(e: Object) {
 		this.props.updateSortBy(e.currentTarget.value);
 		this.props.clearOffset();
 		this.props.fetchMovies();
@@ -34,14 +42,6 @@ class SortBy extends React.Component {
 	}
 }
 
-SortBy.propTypes = {
-	total: PropTypes.number.isRequired,
-	sortBy: PropTypes.string.isRequired,
-	updateSortBy: PropTypes.func.isRequired,
-	clearOffset: PropTypes.func.isRequired,
-	fetchMovies: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => {
 	return {
 		total: state.movies.total,
@@ -55,6 +55,4 @@ const mapDispatchToProps = {
 	fetchMovies
 };
 
-export const testHelper = { SortBy };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortBy);
+export default (connect: Function)(mapStateToProps, mapDispatchToProps)(SortBy);

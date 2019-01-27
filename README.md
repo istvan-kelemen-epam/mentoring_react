@@ -9,12 +9,22 @@ $ git clone https://github.com/istvan-kelemen-epam/mentoring_react.git
 $ cd mentoring_react
 $ git checkout 8_useful-libraries
 $ npm install
+
+$ yarn add -D flow-typed
+$ yarn flow-typed install
 ```
 
 ### Compile
 
 ```bash
-npm run build
+$ npm run build
+```
+
+### Utilities
+
+```bash
+$ npm run lint # to check eslint errors
+$ npm run flow # to check the flow types
 ```
 
 ### Run the dev-server

@@ -1,9 +1,12 @@
 module.exports = {
-	"extends": "airbnb-base",
+	"extends": [
+		"airbnb-base"
+	],
 	"plugins": [
 		"import",
 		"react",
-		"jsx-a11y"
+		"jsx-a11y",
+		"flowtype"
 	],
 	"parser": "babel-eslint",
 	"env": {
@@ -39,6 +42,7 @@ module.exports = {
 			"error",
 			"single"
 		],
-		"semi": "error"
+		"semi": "error",
+		"flowtype/define-flow-type": 1
 	}
 };
