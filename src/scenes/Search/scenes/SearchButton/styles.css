@@ -1,11 +1,4 @@
 .search-button button {
 	margin-left: 1em;
-	padding: 0.5em 1em;
-	border: 0;
-	border-radius: 0.5ex;
 	width: 20ex;
-	text-transform: uppercase;
-	color: #fff;
-	background-color: #F55363;
-	cursor: pointer;
 }

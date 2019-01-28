@@ -25,6 +25,7 @@ $ npm run build
 ```bash
 $ npm run lint # to check eslint errors
 $ npm run flow # to check the flow types
+$ npm run storybook # to see the storybook
 ```
 
 ### Run the dev-server

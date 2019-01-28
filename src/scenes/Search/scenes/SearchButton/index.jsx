@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { ButtonActive } from '../../../../components/Stories';
 import { SEARCH_BY } from '../../../../services/actionTypes';
 import { clearOffset, fetchMovies } from '../../../../services/actionCreators';
 
@@ -34,7 +35,7 @@ class SearchButton extends React.Component<Props> {
 	render() {
 		return (
 			<section className="search-button">
-				<button onClick={this.handleClick.bind(this)}>Search</button>
+				<ButtonActive onClick={this.handleClick.bind(this)}>Search</ButtonActive>
 			</section>
 		);
 	}

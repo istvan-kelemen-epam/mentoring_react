@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import { ButtonActive, ButtonInactive } from '../../../../components/Stories';
 import { SEARCH_BY } from '../../../../services/actionTypes';
 import { updateSearchBy } from '../../../../services/actionCreators';
 
@@ -17,23 +18,20 @@ class SearchBy extends React.Component<Props> {
 		this.props.updateSearchBy(searchBy);
 	}
 
+	createSearchByButton(searchBy: String) {
+		const caption = searchBy === SEARCH_BY.TITLE ? 'Title' : 'Genre';
+		return this.props.searchBy === searchBy
+			? <ButtonActive>{caption}</ButtonActive>
+			: <ButtonInactive onClick={this.handleButtonClick.bind(this, searchBy)}>{caption}</ButtonInactive>;
+	}
+
 	render() {
 		return (
 			<section className="search-by">
 				<header>Search by</header>
 				<main>
-					<button
-						className={this.props.searchBy === SEARCH_BY.TITLE ? 'selected' : ''}
-						onClick={this.handleButtonClick.bind(this, SEARCH_BY.TITLE)}
-					>
-						Title
-					</button>
-					<button
-						className={this.props.searchBy === SEARCH_BY.GENRE ? 'selected' : ''}
-						onClick={this.handleButtonClick.bind(this, SEARCH_BY.GENRE)}
-					>
-						Genre
-					</button>
+					{this.createSearchByButton(SEARCH_BY.TITLE)}
+					{this.createSearchByButton(SEARCH_BY.GENRE)}
 				</main>
 			</section>
 		);

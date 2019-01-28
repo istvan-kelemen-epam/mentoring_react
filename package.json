@@ -4,11 +4,12 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "lint": "eslint \"**/*.{js,jsx}\"",
     "flow": "flow",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack",
     "start": "cross-env NODE_ENV=development  node ./server",
-    "prod": "cross-env NODE_ENV=production  node ./server",
-    "lint": "eslint \"**/*.{js,jsx}\""
+    "prod": "cross-env NODE_ENV=production  node ./server"
   },
   "author": "Eduard Trutsyk",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@storybook/react": "^4.1.11",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.4",
