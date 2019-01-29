@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { ButtonActive, ButtonInactive } from '../src/components/Stories';
 
 storiesOf('Button', module)
-	.add('active', () => (
+	.add('Active', () => (
 		<ButtonActive onClick={() => alert('Active button clicked')}>Active</ButtonActive>
 	))
-	.add('inactive', () => (
+	.add('Inactive', () => (
 		<ButtonInactive onClick={() => alert('Inactive button clicked')}>Inactive</ButtonInactive>
 	));

@@ -30,6 +30,9 @@ module.exports = {
 	optimization: { // https://webpack.js.org/guides/code-splitting/#prevent-duplication
 		splitChunks: isDevMod
 			? {}
-			: { chunks: 'all' }
+			: {
+				chunks: 'all',
+				minChunks: 2
+			}
 	}
 };
