@@ -1,12 +1,24 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import injectSheet from 'react-jss';
 
 import List from './scenes/List';
 
-import './styles.css';
+const styles = {
+	result: {
+		margin: '3em 24px',
+		backgroundColor: '#fff',
+		color: '#000'
+	},
+	resultNotFound: {
+		fontSize: 'xx-large',
+		textAlign: 'center'
+	}
+};
 
 type Props = {
+	classes: typeof styles;
 	movies: Object;
 }
 
@@ -17,11 +29,11 @@ class Result extends React.Component<Props> {
 			if (this.props.movies.data.length) {
 				result = <List />;
 			} else {
-				result = <div className="result__not-found">No films found</div>;
+				result = <div className={this.props.classes.resultNotFound}>No films found</div>;
 			}
 		}
 		return (
-			<section className="result">
+			<section className={this.props.classes.result}>
 				{result}
 			</section>
 		);
@@ -32,4 +44,4 @@ const mapStateToProps = state => {
 	return { movies: state.movies };
 };
 
-export default (connect: Function)(mapStateToProps)(Result);
+export default (connect: Function)(mapStateToProps)(injectSheet(styles)(Result));
