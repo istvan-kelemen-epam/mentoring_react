@@ -12,6 +12,8 @@ $ npm install
 
 $ yarn add -D flow-typed
 $ yarn flow-typed install
+
+$ npm install --save-dev webpack-cli # to fix error caused by yarn https://github.com/plotly/dash-component-boilerplate/issues/12#issuecomment-426245734
 ```
 
 ### Compile

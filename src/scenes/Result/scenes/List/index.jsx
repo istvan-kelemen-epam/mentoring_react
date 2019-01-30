@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { createSelector } from 'reselect';
 
 import './styles.css';
 
@@ -9,6 +10,19 @@ type Props = {
 	history: Object;
 	movies: Object;
 }
+
+const releaseDate = item => item.release_date || '';
+const genres = item => item.genres || [];
+
+const releaseYear = createSelector(
+	releaseDate,
+	releaseDate => releaseDate.substring(0, 4)
+);
+
+const formattedGenres = createSelector(
+	genres,
+	genres => genres.join(' & ')
+);
 
 class List extends React.Component<Props> {
 	handleClick(e) {
@@ -31,8 +45,8 @@ class List extends React.Component<Props> {
 								<img src={item.poster_path}></img>
 							</div>
 							<div className="result-list__item-title">{item.title}</div>
-							<div className="result-list__item-release_year">{item.release_date.substring(0, 4)}</div>
-							<div className="result-list__item-genre">{item.genres && item.genres.join(' & ')}</div>
+							<div className="result-list__item-release_year">{releaseYear(item)}</div>
+							<div className="result-list__item-genre">{formattedGenres(item)}</div>
 						</li>
 					))}
 				</ul>
