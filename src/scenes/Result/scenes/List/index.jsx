@@ -8,7 +8,7 @@ import './styles.css';
 
 type Props = {
 	history: Object;
-	movies: Object;
+	movieList: Object;
 }
 
 const releaseDate = item => item.release_date || '';
@@ -39,7 +39,7 @@ class List extends React.Component<Props> {
 		return (
 			<section className="result-list__container">
 				<ul className="result-list" onClick={this.handleClick.bind(this)}>
-					{this.props.movies.data.map(item => (
+					{this.props.movieList.map(item => (
 						<li key={item.id} data-id={item.id} className="result-list__item">
 							<div className="result-list__item-poster">
 								<img src={item.poster_path}></img>
@@ -55,8 +55,4 @@ class List extends React.Component<Props> {
 	}
 }
 
-const mapStateToProps = state => {
-	return { movies: state.movies };
-};
-
-export default withRouter(connect(mapStateToProps)(List));
+export default withRouter(connect()(List));

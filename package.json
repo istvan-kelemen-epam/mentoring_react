@@ -18,6 +18,7 @@
     "cross-env": "^5.1.6",
     "eslint-plugin-flowtype": "^3.2.1",
     "express": "^4.16.3",
+    "immutable": "^4.0.0-rc.12",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",

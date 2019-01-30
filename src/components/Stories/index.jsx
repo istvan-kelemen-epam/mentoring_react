@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-    className: String;
+    className?: ?String;
     children?: ?any;
     onClick?: ?Function;
 }

@@ -10,6 +10,8 @@ import {
 	SEARCH_BY
 } from './actionTypes';
 
+import { List } from 'immutable';
+
 export const updateSearchExpression = searchExpression => ({
 	type: UPDATE_SEARCH_EXPRESSION,
 	payload: {
@@ -54,10 +56,11 @@ const fetchMoviesBySearchBy = (type, searchBy, searchExpression, dispatch, getSt
 			reject();
 			throw new Error('Network error');
 		}).then(movies => {
+			const immutableMovies = Object.assign({}, movies, { data: List(movies.data) });
 			dispatch({
 				type: type,
 				payload: {
-					movies
+					movies: immutableMovies
 				}
 			});
 			resolve();
